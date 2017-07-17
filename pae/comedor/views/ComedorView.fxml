@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDialog?>
+<?import com.jfoenix.controls.JFXDrawer?>
+<?import com.jfoenix.controls.JFXHamburger?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pae.comedor.controllers.ComedorController">
+    <children>
+        <ImageView fitHeight="600.0" fitWidth="800.0" opacity="0.5" pickOnBounds="true">
+            <image>
+                <Image url="@../../utils/img/fondo2.jpg" />
+            </image>
+        </ImageView>
+        <Label layoutY="580.0" prefHeight="20.0" prefWidth="800.0" style="-fx-background-color: #000000;" />
+        <Text fill="WHITE" fontSmoothingType="LCD" layoutX="610.0" layoutY="595.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="Servicio Comunitario - UNEG 2017" textAlignment="RIGHT" />
+        <Pane prefHeight="50.0" prefWidth="800.0" style="-fx-background-color: #2196f3;">
+         <children>
+              <Label layoutX="660.0" layoutY="15.0" text="Comedor" textFill="WHITE">
+                  <font>
+                      <Font name="System Bold" size="18.0" />
+                  </font>
+              </Label>
+              <JFXHamburger fx:id="menu" layoutX="10.0" layoutY="15.0" />
+              <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="750.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                      <Image url="@../../utils/img/fork.png" />
+                  </image>
+              </ImageView>
+         </children>
+      </Pane>
+        <JFXTabPane layoutY="50.0" prefHeight="530.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab text="Control Individual">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #e3f2fd;">
+                            <children>
+                                <Label layoutX="367.0" layoutY="23.0" text="Control Individual" textAlignment="CENTER">
+                                    <font>
+                                        <Font name="System Bold" size="14.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="77.0" layoutY="115.0" prefHeight="20.0" prefWidth="62.0" text="Nombre:">
+                                    <font>
+                                        <Font name="System Bold" size="14.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="nombreLabel" layoutX="142.0" layoutY="115.0">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="79.0" layoutY="171.0" prefHeight="20.0" prefWidth="50.0" text="Grado:">
+                                    <font>
+                                        <Font name="System Bold" size="14.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="gradoLabel" layoutX="129.0" layoutY="171.0">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="169.0" layoutY="171.0" prefHeight="20.0" prefWidth="63.0" text="Sección:">
+                                    <font>
+                                        <Font name="System Bold" size="14.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="seccionLabel" layoutX="229.0" layoutY="171.0">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="79.0" layoutY="232.0" prefHeight="20.0" prefWidth="50.0" text="Estado:">
+                                    <font>
+                                        <Font name="System Bold" size="14.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="estadoLabel" layoutX="134.0" layoutY="232.0">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Label>
+                                <JFXTextField fx:id="cedulaTextField" alignment="CENTER_RIGHT" focusColor="#2196f3" labelFloat="true" layoutX="595.0" layoutY="89.0" promptText="Cédula">
+                           <font>
+                              <Font size="14.0" />
+                           </font></JFXTextField>
+                                <JFXButton fx:id="buscarButton" layoutX="661.0" layoutY="171.0" onAction="#buscarAlumno" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #2196f3;" text="Buscar" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="14.0" />
+                                    </font>
+                                </JFXButton>
+                                <JFXButton fx:id="btnEmpezar" layoutX="384.0" layoutY="392.0" onAction="#startCamera" prefWidth="90.0" style="-fx-background-color: #2196f3;" text="Empezar" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="14.0" />
+                                    </font>
+                                </JFXButton>
+                        <JFXDialog fx:id="advertenciaDialog" layoutX="150.0" layoutY="125.0" prefHeight="120.0" prefWidth="300.0" transitionType="TOP" />
+                        <Line endX="100.0" layoutX="177.0" layoutY="137.0" startX="-100.0" stroke="#2196f3" />
+                        <Line endX="100.0" layoutX="179.0" layoutY="194.0" startX="-100.0" stroke="#2196f3" />
+                        <Line endX="100.0" layoutX="179.0" layoutY="253.0" startX="-100.0" stroke="#2196f3" />
+                                <ImageView fx:id="currentFrame" fitHeight="253.0" fitWidth="278.0" layoutX="290.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true">
+                                </ImageView>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Control por Sección">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #e3f2fd;">
+                            <children>
+                                <Label contentDisplay="CENTER" layoutX="339.0" layoutY="23.0" text="Control por Sección" textAlignment="CENTER">
+                                    <font>
+                                        <Font name="System Bold" size="14.0" />
+                                    </font>
+                                </Label>
+                                <JFXComboBox fx:id="gradoComboBox" focusColor="#2196f3" layoutX="16.0" layoutY="43.0" prefHeight="25.0" prefWidth="70.0" promptText="Grado" />
+                                <JFXTreeTableView fx:id="comedorTreeTableView" layoutX="186.0" layoutY="56.0" prefHeight="415.0" prefWidth="590.0" />
+                                <JFXComboBox fx:id="seccionComboBox" focusColor="#2196f3" layoutX="97.0" layoutY="43.0" prefHeight="25.0" prefWidth="70.0" promptText="Sección" />
+                        <JFXButton fx:id="btnProcesar" onAction="#procesarAlumnos" layoutX="41.0" layoutY="418.0" prefWidth="90.0" style="-fx-background-color: #2196f3;" text="Procesar" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font></JFXButton>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </JFXTabPane>
+      <JFXDrawer fx:id="side" defaultDrawerSize="200.0" layoutY="50.0" prefHeight="550.0" prefWidth="10.0" />
+        <StackPane fx:id="stackPane" layoutX="225.0" layoutY="250.0" prefHeight="10.0" prefWidth="10.0" />
+    </children>
+</Pane>

@@ -89,11 +89,46 @@ public class AlumnoDbAdapter implements IDataAdapter<Alumno>{
         return false;
     }
 
+    public boolean hasStudentEaten (IDbConnection db,
+                                    HashMap<String, Object> options, String FOOD) {
+        String sql = "SELECT * FROM public.registro_comidas WHERE \"CI\" = '"
+                + options.get("CI") + "' AND fecha = '" + options.get("fecha") + "'"
+                + "AND comida = '" + FOOD + "'";
+        PostgresDbConnection postgresDb = (PostgresDbConnection) db;
+        try {
+            ResultSet rs = postgresDb.getResultSet(sql);
+            RegistroComida rg = null;
+            while (rs.next()) {
+                rg = new RegistroComida(rs.getString("CI"), rs.getDate("fecha"));
+            }
+            if (rg != null)
+                return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(AlumnoDbAdapter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
     public void studentEat (IDbConnection db,
                             HashMap<String, Object> options) {
         if (options != null) {
             String sql = "INSERT INTO public.registro_comidas(\"CI\", fecha)"
             + " VALUES ('" + options.get("CI") + "', '" + options.get("fecha") + "')";
+            PostgresDbConnection postgresDb = (PostgresDbConnection) db;
+            try
+            {
+                postgresDb.executeUpdate(sql);
+            } catch (SQLException ex) {
+                Logger.getLogger(AlumnoDbAdapter.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    public void studentEat (IDbConnection db,
+                            HashMap<String, Object> options, String FOOD) {
+        if (options != null) {
+            String sql = "INSERT INTO public.registro_comidas(\"CI\", fecha, comida)"
+                    + " VALUES ('" + options.get("CI") + "', '" + options.get("fecha") + "', '" + FOOD + "')";
             PostgresDbConnection postgresDb = (PostgresDbConnection) db;
             try
             {
@@ -110,6 +145,27 @@ public class AlumnoDbAdapter implements IDataAdapter<Alumno>{
         PostgresDbConnection postgresDb = (PostgresDbConnection) db;
         try {
             String sql = "select \"CI\" from public.registro_comidas WHERE fecha = '" + options.get("fecha") + "' " +
+                    "intersect " +
+                    "select \"CI\" from public.alumnos WHERE grado = '"
+                    + options.get("grado") + "' AND seccion = '" + options.get("seccion") + "'";
+            ResultSet rs = postgresDb.getResultSet(sql);
+            while (rs.next()){
+                String ci = rs.getString("CI");
+                cis.add(ci);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AlumnoDbAdapter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return cis;
+    }
+
+    public List<String> getCIsWhoAte (IDbConnection db,
+                                      HashMap<String, Object> options, String FOOD) {
+        List<String> cis = new ArrayList<>();
+        PostgresDbConnection postgresDb = (PostgresDbConnection) db;
+        try {
+            String sql = "select \"CI\" from public.registro_comidas WHERE fecha = '"
+                    + options.get("fecha") + "' AND comida = '" + FOOD + "'" +
                     "intersect " +
                     "select \"CI\" from public.alumnos WHERE grado = '"
                     + options.get("grado") + "' AND seccion = '" + options.get("seccion") + "'";

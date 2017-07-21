@@ -7,14 +7,15 @@
 <?import com.jfoenix.controls.JFXHamburger?>
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXToggleButton?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -114,6 +115,16 @@
                         <Line endX="100.0" layoutX="179.0" layoutY="253.0" startX="-100.0" stroke="#2196f3" />
                                 <ImageView fx:id="currentFrame" fitHeight="253.0" fitWidth="278.0" layoutX="290.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true">
                                 </ImageView>
+                                <JFXToggleButton fx:id="tgglFood" layoutX="645.0" layoutY="15.0" text="Almuerzo" onAction="#selectFood">
+                                    <font>
+                                        <Font size="12.0" />
+                                    </font>
+                                </JFXToggleButton>
+                                <Label layoutX="592.0" layoutY="35.0" text="Desayuno">
+                                    <font>
+                                        <Font size="12.0" />
+                                    </font>
+                                </Label>
                             </children>
                         </AnchorPane>
                     </content>
@@ -130,10 +141,20 @@
                                 <JFXComboBox fx:id="gradoComboBox" focusColor="#2196f3" layoutX="16.0" layoutY="43.0" prefHeight="25.0" prefWidth="70.0" promptText="Grado" />
                                 <JFXTreeTableView fx:id="comedorTreeTableView" layoutX="186.0" layoutY="56.0" prefHeight="415.0" prefWidth="590.0" />
                                 <JFXComboBox fx:id="seccionComboBox" focusColor="#2196f3" layoutX="97.0" layoutY="43.0" prefHeight="25.0" prefWidth="70.0" promptText="Sección" />
-                        <JFXButton fx:id="btnProcesar" onAction="#procesarAlumnos" layoutX="41.0" layoutY="418.0" prefWidth="90.0" style="-fx-background-color: #2196f3;" text="Procesar" textFill="WHITE">
+                        <JFXButton fx:id="btnProcesar" layoutX="41.0" layoutY="418.0" onAction="#procesarAlumnos" prefWidth="90.0" style="-fx-background-color: #2196f3;" text="Procesar" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font></JFXButton>
+                        <JFXToggleButton fx:id="tgglFood1" layoutX="657.0" layoutY="5.0" text="Almuerzo" onAction="#selectFood1">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </JFXToggleButton>
+                        <Label layoutX="604.0" layoutY="25.0" text="Desayuno">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Label>
                             </children>
                         </AnchorPane>
                     </content>

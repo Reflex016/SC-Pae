@@ -14,7 +14,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/pae/app/views/LoginView.fxml"));
-        primaryStage.setTitle("Sistema de Control de Almuerzos");
+        primaryStage.setTitle("Sistema de Control de Comidas - SAE");
         primaryStage.getIcons().add(new Image("/pae/utils/img/paelogo.png"));
         primaryStage.setScene(new Scene(root, 790, 590));
         primaryStage.setResizable(false);
@@ -22,7 +22,8 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        System.load("C:\\Users\\Isrrael\\IdeaProjects\\SC-Pae\\src\\pae\\utils\\libs\\opencv_java320.dll");
+        System.load(java.nio.file.Paths.get(".").
+                toAbsolutePath().normalize().toString() + "\\bin\\opencv_java320.dll");
         launch(args);
     }
 }

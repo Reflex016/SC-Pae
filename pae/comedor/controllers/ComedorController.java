@@ -66,6 +66,7 @@ public class ComedorController extends Application implements Initializable{
     static String pass = "1234";
     static String url = "jdbc:postgresql://localhost:5432/" + db;
     static PostgresDbConnection conn;
+    static String FOOD = "DESAYUNO";
 
     static CameraController cmrCtrl;
     static Scene scene;
@@ -133,8 +134,24 @@ public class ComedorController extends Application implements Initializable{
 
     }
 
-    public void procesarAlumno (String CI)
-    {
+    public void selectFood(ActionEvent event){
+        ToggleButton tgglFood = (ToggleButton) event.getSource();
+        if (!tgglFood.isSelected())
+            FOOD = "DESAYUNO";
+        else
+            FOOD = "ALMUERZO";
+    }
+
+    public void selectFood1(ActionEvent event){
+        ToggleButton tgglFood = (ToggleButton) event.getSource();
+        if (!tgglFood.isSelected())
+            FOOD = "DESAYUNO";
+        else
+            FOOD = "ALMUERZO";
+        updateTabView();
+    }
+
+    public void procesarAlumno (String CI){
         AlumnoDbAdapter adapter = new AlumnoDbAdapter();
         HashMap<String, Object> opt = new HashMap<String, Object>();
         opt.put("CI", CI);
@@ -150,7 +167,7 @@ public class ComedorController extends Application implements Initializable{
             Date fecha = new java.sql.Date(java.util.Calendar.getInstance().getTimeInMillis());
             opt.put ("fecha", fecha);
 
-            if (adapter.hasStudentEaten(conn, opt))
+            /*if (adapter.hasStudentEaten(conn, opt))
             {
                 Platform.runLater(() -> {
                     estadoLabel.setTextFill(Color.web("#d50000"));
@@ -164,6 +181,22 @@ public class ComedorController extends Application implements Initializable{
                     estadoLabel.setText("HABILITADO");
                 });
                 adapter.studentEat(conn, opt);
+            }*/
+            if (adapter.hasStudentEaten(conn, opt, FOOD))
+            {
+                Platform.runLater(() -> {
+                    estadoLabel.setTextFill(Color.web("#d50000"));
+                    estadoLabel.setText("INHABIILITADO");
+                });
+            }
+            else
+            {
+                Platform.runLater(() -> {
+                    estadoLabel.setTextFill(Color.web("#64dd17"));
+                    estadoLabel.setText("HABILITADO");
+                });
+                //adapter.studentEat(conn, opt);
+                adapter.studentEat(conn, opt, FOOD);
             }
         }
         else
@@ -215,7 +248,8 @@ public class ComedorController extends Application implements Initializable{
             }
             Date fecha = new java.sql.Date(java.util.Calendar.getInstance().getTimeInMillis());
             opt.put ("fecha", fecha);
-            setDisps (ad.getCIsWhoAte(conn, opt));
+            //setDisps (ad.getCIsWhoAte(conn, opt));
+            setDisps (ad.getCIsWhoAte(conn, opt, FOOD));
         }
     }
 
@@ -240,13 +274,23 @@ public class ComedorController extends Application implements Initializable{
             opt.put("CI", s.getCI());
             opt.put ("fecha", fecha);
             if (s.habilitado.getValue()) {
-                if (!ad.hasStudentEaten(conn, opt)) {
+                /*if (!ad.hasStudentEaten(conn, opt)) {
                     s.setHabilitado(false);
                     ad.studentEat(conn, opt);
                     opt.clear();
                 }
                 else
+                    err.add(s.ci.get() + ", " + s.names.get() + ", " + s.lastNames.get());*/
+                if (!ad.hasStudentEaten(conn, opt, FOOD)) {
+                    s.setHabilitado(false);
+                    //ad.studentEat(conn, opt);
+                    ad.studentEat(conn, opt, FOOD);
+                    opt.clear();
+                }
+                else {
+                    //s.setHabilitado(false);
                     err.add(s.ci.get() + ", " + s.names.get() + ", " + s.lastNames.get());
+                }
             }
         }
         updateTabView();
@@ -256,8 +300,8 @@ public class ComedorController extends Application implements Initializable{
                 txtShow += "\n" + str;
             }
             AlertMaker alertMaker = new AlertMaker();
-            alertMaker.loadInfoDialog(stackPane,"Control de Almuerzos",
-                    "No se puede comer repetidas veces, solo una vez al día:\n" + txtShow +"\n");
+            alertMaker.loadInfoDialog(stackPane,"Control de Comidas",
+                    "Sólo se puede optar por un " + FOOD.toLowerCase() + " al día:\n" + txtShow +"\n");
         }
     }
 
